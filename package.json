@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "glaro-trello",
-  "title": "Glaro Trello",
+  "name": "trello-list",
+  "title": "Trello",
   "description": "List Trellos in a specific List",
   "icon": "command-icon.png",
   "author": "Miriam",
