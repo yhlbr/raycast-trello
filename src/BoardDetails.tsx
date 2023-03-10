@@ -1,11 +1,15 @@
 import { ActionPanel, List, Action, LocalStorage } from "@raycast/api";
 import { useState, useEffect } from "react";
 import ListDetails from "./ListDetails";
-import Trello from "./Trello";
+import Trello, { TrelloList } from "./Trello";
 
-export default function BoardDetails({ boardId }) {
+type PropTypes = {
+    boardId: string
+};
+
+export default function BoardDetails({ boardId }: PropTypes) {
     const trello = new Trello();
-    const [lists, setLists] = useState([]);
+    const [lists, setLists] = useState<TrelloList[]>([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         setLoading(true);
@@ -23,15 +27,15 @@ export default function BoardDetails({ boardId }) {
         <List isLoading={loading}>
             {lists.map((list) => {
                 return (<List.Item
-                icon="list-icon.png"
-                title={list.name}
-                key={list.id}
-                actions={
-                    <ActionPanel>
-                        <Action.Push title="Show Details" target={<ListDetails listId={list.id} />} />
-                        <Action title="Favourite" onAction={() => { favouriteList(list.id); }} />
-                    </ActionPanel>
-                } />)
+                    icon="list-icon.png"
+                    title={list.name}
+                    key={list.id}
+                    actions={
+                        <ActionPanel>
+                            <Action.Push title="Show Details" target={<ListDetails listId={list.id} />} />
+                            <Action title="Favourite" onAction={() => { favouriteList(list.id); }} />
+                        </ActionPanel>
+                    } />)
             })}
         </List>
     );

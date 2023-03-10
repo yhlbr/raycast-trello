@@ -1,11 +1,11 @@
 import { ActionPanel, List, Action } from "@raycast/api";
 import { useState, useEffect } from "react";
 import BoardDetails from "./BoardDetails";
-import Trello from "./Trello";
+import Trello, { TrelloBoard } from "./Trello";
 
 export default function Navigate() {
     const trello = new Trello();
-    const [boards, setBoards] = useState([]);
+    const [boards, setBoards] = useState<TrelloBoard[]>([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         setLoading(true);
@@ -16,7 +16,7 @@ export default function Navigate() {
     }, []);
     return (
         <List isLoading={loading}>
-            {boards.map((board, i) => {
+            {boards.map((board) => {
                 return (<List.Item
                 icon="list-icon.png"
                 title={board.name}

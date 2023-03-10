@@ -1,17 +1,23 @@
 import { List } from "@raycast/api";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CardListItem from "./CardListItem";
-import Trello from "./Trello";
-import debounce from 'lodash.debounce';
+import Trello, { TrelloCard } from "./Trello";
+import debounce from "lodash.debounce";
 
 
 export default function Search() {
     const trello = new Trello();
     const [cards, setCards] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
-    const searchTrellos = (text) => {
-        setLoading(true);
+    const searchTrellos = (text: string) => {
+        if (text !== "") {
+            setLoading(true);
+        }
+        else {
+            return;
+        }
+
         trello.search(text).then((cards) => {
             setCards(cards);
             setLoading(false);
@@ -22,7 +28,7 @@ export default function Search() {
 
     return (
         <List isLoading={loading} filtering={false} onSearchTextChange={changeHandler}>
-            {cards.map((card) => {
+            {cards.map((card: TrelloCard) => {
                 return (<CardListItem key={card.id} card={card} />)
             })}
         </List>

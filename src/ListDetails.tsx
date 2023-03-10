@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import CardsList from "./CardsList";
 import Trello from "./Trello";
 
-export default function ListDetails({ listId }) {
+
+type PropTypes = {
+    listId: string
+};
+
+
+export default function ListDetails({ listId }: PropTypes) {
     const trello = new Trello();
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);

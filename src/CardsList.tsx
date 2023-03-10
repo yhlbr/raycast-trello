@@ -1,7 +1,14 @@
 import CardListItem from "./CardListItem";
 import { List } from "@raycast/api";
+import { TrelloCard } from "./Trello";
 
-export default function CardsList({ cards, loading }) {
+
+type PropTypes = {
+    cards: TrelloCard[],
+    loading: boolean
+};
+
+export default function CardsList({ cards, loading }: PropTypes) {
     return (
         <List isLoading={loading}>
             {cards.map((card) => {

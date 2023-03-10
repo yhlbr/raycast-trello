@@ -1,16 +1,20 @@
 import { ActionPanel, Detail } from "@raycast/api";
-import Trello from "./Trello";
+import Trello, { TrelloCard, TrelloComment, TrelloMember } from "./Trello";
 import { useEffect, useState } from "react";
 import CardActions from "./CardActions";
 
 const moment = require('moment');
 
 
-export default function CardDetails({ card }) {
+type PropTypes = {
+    card: TrelloCard
+};
+
+export default function CardDetails({ card }: PropTypes) {
     const trello = new Trello();
     const [hasImage, setHasImage] = useState(false);
-    const [members, setMembers] = useState([]);
-    const [comments, setComments] = useState([]);
+    const [members, setMembers] = useState<TrelloMember[]>([]);
+    const [comments, setComments] = useState<TrelloComment[]>([]);
     const [description, setDescription] = useState('');
     const [metadata, setMetadata] = useState(<></>);
 
@@ -24,7 +28,7 @@ export default function CardDetails({ card }) {
 
         if (comments) {
             description += "\n\n# Comments\n";
-            for(const comment of comments) {
+            for (const comment of comments) {
                 description += "\n## " + comment.memberCreator.fullName + "\n";
                 description += comment.data.text;
             }
@@ -62,8 +66,9 @@ export default function CardDetails({ card }) {
 
     useEffect(() => {
         if (card.cover?.scaled && card.cover?.scaled[0]?.url) {
+            const creds = trello.getCredentials();
             let url = card.cover.scaled[card.cover.scaled.length - 1].url;
-            url += '?key=' + Trello.API_KEY + "&token=" + Trello.API_TOKEN;
+            url += '?key=' + creds.apiKey + "&token=" + creds.apiKey;
             trello.downloadAsset(url, '/tmp/raycast_trello_thumb.png').then(() => {
                 setHasImage(true);
             });
@@ -85,7 +90,7 @@ export default function CardDetails({ card }) {
     useEffect(() => {
         setMetadata(buildMetadata());
     }, [members]);
-    
+
 
     return (<Detail
         markdown={description}

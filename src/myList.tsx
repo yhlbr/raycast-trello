@@ -4,11 +4,11 @@ import ListDetails from "./ListDetails";
 
 
 export default function MyList() {
-    const [favouriteListId, setFavouriteListId] = useState('');
+    const [favouriteListId, setFavouriteListId] = useState<string|null>('');
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        LocalStorage.getItem<string>("favouriteListId").then((listId) => {
-            setFavouriteListId(listId);
+        LocalStorage.getItem<string>("favouriteListId").then((listId: string|undefined) => {
+            setFavouriteListId(listId || null);
             setLoading(false);
         });
     }, []);
