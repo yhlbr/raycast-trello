@@ -1,4 +1,4 @@
-import { List } from "@raycast/api";
+import { List, showToast, Toast } from "@raycast/api";
 import { useState } from "react";
 import CardListItem from "./CardListItem";
 import Trello, { TrelloCard } from "./Trello";
@@ -21,6 +21,13 @@ export default function Search() {
         trello.search(text).then((cards) => {
             setCards(cards);
             setLoading(false);
+        })
+        .catch(() => {
+            setLoading(false);
+            showToast({
+                style: Toast.Style.Failure,
+                title: "Error: Please check the API credentials"
+              });
         });
     }
 

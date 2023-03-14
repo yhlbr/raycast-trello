@@ -76,27 +76,30 @@ export default class Trello {
         return getPreferenceValues<Preferences>();
     }
 
-    async getBoards() {
-        return (await this.axios.get('/members/me/boards')).data;
+    async getBoards(): Promise<TrelloBoard[]> {
+        return this.axios.get('/members/me/boards')
+            .then((res) => res.data);
     }
 
-    async getLists(boardId: string) {
-        return (await this.axios.get('/boards/' + boardId + '/lists')).data;
+    async getLists(boardId: string): Promise<TrelloList[]> {
+        return this.axios.get('/boards/' + boardId + '/lists')
+            .then((res) => res.data);
     }
 
-    async getCards(listId: string) {
-        return (await this.axios.get('/lists/' + listId + '/cards')).data;
+    async getCards(listId: string): Promise<TrelloCard[]> {
+        return this.axios.get('/lists/' + listId + '/cards')
+            .then((res) => res.data);
     }
 
     async search(query: string) {
         if (!query) {
             return [];
         }
-        return (await this.axios.get('/search/', {
+        return this.axios.get('/search/', {
             params: {
                 query: query
             }
-        })).data.cards;
+        }).then((res) => res.data?.cards);
     }
 
     async downloadAsset(url: string, localpath: string) {
@@ -162,11 +165,11 @@ export default class Trello {
     }
 
     async getComments(cardId: string) {
-        return (await this.axios.get('/cards/' + cardId + '/actions/', {
+        return this.axios.get('/cards/' + cardId + '/actions/', {
             params: {
                 filter: 'commentCard'
             }
-        })).data;
+        }).then((res) => res.data);
     }
 
     async addComment(cardId: string, comment: string) {

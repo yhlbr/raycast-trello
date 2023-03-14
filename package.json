@@ -1,73 +1,73 @@
 {
-  "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "trello-list",
-  "title": "Trello",
-  "description": "List Trellos in a specific List",
-  "icon": "command-icon.png",
-  "author": "Miriam",
-  "license": "MIT",
-  "commands": [
-    {
-      "name": "navigate",
-      "title": "Trellos",
-      "subtitle": "Show Trellos",
-      "description": "List all Trello cards in a specific list",
-      "mode": "view"
+    "$schema": "https://www.raycast.com/schemas/extension.json",
+    "name": "trello-list",
+    "title": "Trello",
+    "description": "List Trellos in a specific List",
+    "icon": "command-icon.png",
+    "author": "Miriam",
+    "license": "MIT",
+    "commands": [
+        {
+            "name": "navigate",
+            "title": "Trellos",
+            "subtitle": "Show Trellos",
+            "description": "List all Trello cards in a specific list",
+            "mode": "view"
+        },
+        {
+            "name": "search",
+            "title": "Search Trellos",
+            "subtitle": "Search all Trellos",
+            "description": "Search all Trello cards",
+            "mode": "view"
+        },
+        {
+            "name": "myList",
+            "title": "My List",
+            "subtitle": "Show my List",
+            "description": "Show the favourited Trello List",
+            "mode": "view"
+        }
+    ],
+    "preferences": [
+        {
+            "name": "apiKey",
+            "description": "Trello API Key",
+            "type": "textfield",
+            "required": true,
+            "title": "Trello API Key"
+        },
+        {
+            "name": "apiToken",
+            "description": "Trello API Token",
+            "type": "textfield",
+            "required": true,
+            "title": "Trello API Token"
+        }
+    ],
+    "dependencies": {
+        "@raycast/api": "^1.48.7",
+        "@types/lodash.debounce": "^4.0.7",
+        "axios": "^1.3.4",
+        "lodash.debounce": "^4.0.8",
+        "moment": "^2.29.4",
+        "request": "^2.88.2"
     },
-    {
-      "name": "search",
-      "title": "Search Trellos",
-      "subtitle": "Search all Trellos",
-      "description": "Search all Trello cards",
-      "mode": "view"
+    "devDependencies": {
+        "@types/node": "18.8.3",
+        "@types/react": "18.0.9",
+        "@typescript-eslint/eslint-plugin": "^5.0.0",
+        "@typescript-eslint/parser": "^5.0.0",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "prettier": "^2.5.1",
+        "typescript": "^4.4.3"
     },
-    {
-      "name": "myList",
-      "title": "My List",
-      "subtitle": "Show my List",
-      "description": "Show the favourited Trello List",
-      "mode": "view"
+    "scripts": {
+        "build": "ray build -e dist",
+        "dev": "ray develop",
+        "fix-lint": "ray lint --fix",
+        "lint": "ray lint",
+        "publish": "ray publish"
     }
-  ],
-  "preferences": [
-    {
-      "name": "apiKey",
-      "description": "Trello API Key",
-      "type": "textfield",
-      "required": true,
-      "title": "Trello API Key"
-    },
-    {
-      "name": "apiToken",
-      "description": "Trello API Token",
-      "type": "textfield",
-      "required": true,
-      "title": "Trello API Token"
-    }
-  ],
-  "dependencies": {
-    "@raycast/api": "^1.48.7",
-    "@types/lodash.debounce": "^4.0.7",
-    "axios": "^1.3.4",
-    "lodash.debounce": "^4.0.8",
-    "moment": "^2.29.4",
-    "request": "^2.88.2"
-  },
-  "devDependencies": {
-    "@types/node": "18.8.3",
-    "@types/react": "18.0.9",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "prettier": "^2.5.1",
-    "typescript": "^4.4.3"
-  },
-  "scripts": {
-    "build": "ray build -e dist",
-    "dev": "ray develop",
-    "fix-lint": "ray lint --fix",
-    "lint": "ray lint",
-    "publish": "ray publish"
-  }
 }

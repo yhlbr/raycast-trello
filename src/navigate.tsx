@@ -1,4 +1,4 @@
-import { ActionPanel, List, Action } from "@raycast/api";
+import { ActionPanel, List, Action, showToast, Toast } from "@raycast/api";
 import { useState, useEffect } from "react";
 import BoardDetails from "./BoardDetails";
 import Trello, { TrelloBoard } from "./Trello";
@@ -12,6 +12,13 @@ export default function Navigate() {
         trello.getBoards().then((boards) => {
             setBoards(boards);
             setLoading(false);
+        })
+        .catch(() => {
+            setLoading(false);
+            showToast({
+                style: Toast.Style.Failure,
+                title: "Error: Please check the API credentials"
+              });
         });
     }, []);
     return (

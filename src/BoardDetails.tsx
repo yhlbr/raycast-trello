@@ -1,4 +1,4 @@
-import { ActionPanel, List, Action, LocalStorage } from "@raycast/api";
+import { ActionPanel, List, Action, LocalStorage, showToast, Toast } from "@raycast/api";
 import { useState, useEffect } from "react";
 import ListDetails from "./ListDetails";
 import Trello, { TrelloList } from "./Trello";
@@ -21,6 +21,11 @@ export default function BoardDetails({ boardId }: PropTypes) {
 
     const favouriteList = async (listId: string) => {
         await LocalStorage.setItem("favouriteListId", listId);
+
+        showToast({
+            style: Toast.Style.Success,
+            title: "Set List as favourite"
+          });
     }
 
     return (
